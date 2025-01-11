@@ -60,7 +60,7 @@
 ![image](https://github.com/user-attachments/assets/553ff720-f8df-4293-b582-e3ecf674e518)
 
 - **Consulter `eventStore` :**
-![image](https://github.com/user-attachments/assets/bd0bfe8a-2a50-4a06-b71f-c1473fc7ab7a)
+![image](https://github.com/user-attachments/assets/ee87857c-942a-4cf1-8abe-7e1f25cc1c76)
 
 ### Testing Credit et Debit :
 - **Testing Credit :**
