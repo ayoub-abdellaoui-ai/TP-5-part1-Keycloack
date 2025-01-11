@@ -1,4 +1,6 @@
-# TP-5-part1-Keycloack# Sécurisation des Microservices avec Keycloak
+# TP-5-part1-Keycloack
+
+# Sécurisation des Microservices avec Keycloak
 
 ## Partie 1 : Configuration de Keycloak
 
@@ -33,72 +35,40 @@
 
 ---
 
-## Partie 2 : Sécurisation des Microservices
+## Étapes à suivre avec captures d'écran :
 
-### Projet : [E-commerce Micro-Services Spring | Angular](https://github.com/Amina-contact/e-commerce-Micro-services-Spring-Angular)
+### Créer une application qui permet de gérer des comptes respectant les patterns CQRS et Event Sourcing avec les Framework AXON et Spring Boot.
 
-### Étapes de sécurisation :
+![image](https://github.com/user-attachments/assets/b17089a3-3a5a-47ce-b97c-1ea842ddee5d)
 
-1. **Ajouter des dépendances dans le fichier `pom.xml` :**
-   ```xml
-   <dependency>
-       <groupId>org.springframework.boot</groupId>
-       <artifactId>spring-boot-starter-security</artifactId>
-   </dependency>
-   <dependency>
-       <groupId>org.keycloak</groupId>
-       <artifactId>keycloak-spring-boot-starter</artifactId>
-   </dependency>
-   ```
+### Testing create account :
+- **Créer un compte :**
+![image](https://github.com/user-attachments/assets/fb096d2e-3595-47a7-b052-f7e55422916c)
 
-2. **Créer une classe de configuration Keycloak Adapter :**
-   ```java
-   @Configuration
-   public class KeycloakAdapterConfig {
-       @Bean
-       KeycloakSpringBootConfigResolver springBootConfigResolver() {
-           return new KeycloakSpringBootConfigResolver();
-       }
-   }
-   ```
+- **Après exception :**
+![image](https://github.com/user-attachments/assets/6d902224-2b19-4859-87d0-2b68054c5630)
 
-3. **Configurer la sécurité dans le projet :**
-   ```java
-   @KeycloakConfiguration
-   @EnableGlobalMethodSecurity(prePostEnabled = true)
-   public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
-       @Override
-       protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
-           return new RegisterSessionAuthenticationStrategy(new SessionRegistryImpl());
-       }
+- **Testing create account :**
+![image](https://github.com/user-attachments/assets/668b205d-7150-457f-94aa-eb4a880a249a)
 
-       @Override
-       protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-           auth.authenticationProvider(keycloakAuthenticationProvider());
-       }
+### Vérifier la base de données :
+- **Voir les entrées dans `domain_event_entry` :**
+![image](https://github.com/user-attachments/assets/6ad45da8-18c9-4bc3-9396-861370da1154)
+![image](https://github.com/user-attachments/assets/5cb4e5ef-53d5-46b6-912d-237c1dfac35e)
 
-       @Override
-       protected void configure(HttpSecurity http) throws Exception {
-           super.configure(http);
-           http.csrf().disable();
-           http.authorizeRequests().antMatchers("/h2-consol/**").permitAll();
-           http.headers().frameOptions().disable();
-           http.authorizeRequests().anyRequest().authenticated();
-       }
-   }
-   ```
+- **Voir le contenu de l'événement :**
+![image](https://github.com/user-attachments/assets/553ff720-f8df-4293-b582-e3ecf674e518)
 
-4. **Configurer l'autorisation dans le contrôleur :**
-   - Ajoutez l'annotation :
-     ```java
-     @PreAuthorize("hasAuthority('ADMIN')")
-     ```
+- **Consulter `eventStore` :**
+![image](https://github.com/user-attachments/assets/bd0bfe8a-2a50-4a06-b71f-c1473fc7ab7a)
 
-5. **Tester les rôles :**
-   - **Avec le rôle ADMIN** :
-     - Accédez aux routes nécessitant des autorisations administratives.
-   - **Avec le rôle USER** :
-     - Vérifiez les restrictions appliquées pour un utilisateur standard.
+### Testing Credit et Debit :
+- **Testing Credit :**
+![image](https://github.com/user-attachments/assets/4c9f2767-3022-4f99-a252-8affcdebafc9)
+
+- **Testing Debit :**
+![image](https://github.com/user-attachments/assets/93ad49ec-c5a8-4ab6-9fb4-6efbed484de2)
+![image](https://github.com/user-attachments/assets/23552395-887c-4d85-893d-65d090d76e8e)
 
 ---
 
